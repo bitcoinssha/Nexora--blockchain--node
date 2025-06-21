@@ -1,0 +1,41 @@
+start-nexora-node.sh
+
+#!/bin/bash
+
+echo "🚀 Iniciando Nodo Nexora Local..."
+
+Crear carpeta de red si no existe
+
+mkdir -p ~/.nexora
+
+Inicializar blockchain local
+
+geth --datadir ~/.nexora init genesis.json
+
+Iniciar nodo en modo desarrollador y habilitar RPC
+
+geth 
+--datadir ~/.nexora 
+--networkid 6666 
+--http 
+--http.addr 0.0.0.0 
+--http.port 8545 
+--http.corsdomain "*" 
+--http.api personal,eth,net,web3 
+--nodiscover 
+--allow-insecure-unlock 
+--miner.etherbase=0x0000000000000000000000000000000000000000 
+--mine 
+--unlock 0 
+--password ./password.txt
+
+genesis.json
+
+{ "config": { "chainId": 6666, "homesteadBlock": 0, "eip155Block": 0, "eip158Block": 0 }, "difficulty": "0x1", "gasLimit": "0x47b760", "alloc": { "0x02D4CB747CE490F172e1617C98bF981EB22199A1": { "balance": "0xFFFFFFFFFFFFFFFFFFFFFFFF" } } }
+
+password.txt
+
+1234
+
+chmod +x start-nexora-node.sh
+./start-nexora-node.sh
